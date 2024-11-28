@@ -1,0 +1,85 @@
+<div class="container">
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" class="search-input" />
+  <h3>Popular Items</h3>
+  <div class="product-list">
+    <div class="product" *ngFor="let product of filteredProducts()">
+      <h2>{{ product.name }}</h2>
+      <p>Price: Rs{{ product.price }}</p>
+      <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </div>
+
+  <h2>Shopping Cart</h2>
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <div *ngFor="let item of cartItems; let i = index">
+      <div class="cart-item">
+        <h3>{{ item.name }}</h3>
+        <h3 class="product-info">
+          Cheese Burger <span class="product-price">{{ item.price * item.quantity }}</span>
+        </h3>
+
+        <h3 class="product-info">
+          <span>Product Quantity</span>
+          <div class="quantity-buttons-container">
+            <button (click)="changeQuantity(i, item, -1)">-</button>
+            <button>{{ item.quantity }}</button>
+            <button (click)="changeQuantity(i, item, 1)">+</button>
+          </div>
+        </h3>
+
+
+        <h3>Product Details</h3>
+        <p>Founded in 1954, BURGER KING® is the second largest fast food hamburger chain in the world. The original HOME
+          OF THE WHOPPER®, our commitment to premium ingredients, signature recipes, and family-friendly dining
+          experiences is what has defined our brand for more than 50 successful years.</p>
+      </div>
+    </div>
+
+    <div class="final-list">
+      <h3>Final Order List</h3>
+      <div *ngFor="let item of cartItems">
+        <div class="final-item">
+          <h4>{{ item.name }} - Rs{{ item.price }}</h4>
+          <p>Quantity: {{ item.quantity }} &nbsp;<button
+              (click)="changeQuantity(cartItems.indexOf(item), item, 1)">+</button></p>
+          <p>Total: Rs{{ item.price * item.quantity }}</p>
+
+        </div>
+      </div>
+
+      <!-- Discount Section -->
+      <div class="discount-section">
+        <h4>Discount (10%)</h4>
+        <div class="discount-item">
+          <p class="label">Subtotal:</p>
+          <p class="amount">Rs{{ getOriginalTotal() }}</p>
+        </div>
+        <div class="discount-item">
+          <p class="label">Discount:</p>
+          <p class="amount">Rs{{ getDiscountAmount() }}</p>
+        </div>
+        <div class="discount-item">
+          <p class="label">Total:</p>
+          <p class="amount">Rs{{ getFinalTotal() }}</p>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+    <div class="cart-footer">
+      <p>Total Cart Value: Rs{{ cartService.getTotal() }}</p>
+      <button style="width: -webkit-fill-available; border-radius: 3px;" (click)="buyNow()">Buy Now</button>
+    </div>
+
+
+
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+</div>
