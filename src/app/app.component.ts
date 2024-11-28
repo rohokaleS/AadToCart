@@ -56,12 +56,12 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // Method to calculate the discount amount (10% discount)
+
   getDiscountAmount(): number {
     return this.getOriginalTotal() * 0.1; // 10% discount
   }
 
-  // Method to calculate the final total after discount
+
   getFinalTotal(): number {
     return this.getOriginalTotal() - this.getDiscountAmount();
   }
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
     const newQuantity = item.quantity + change;
     if (newQuantity >= 0) {
       item.quantity = newQuantity;
-      this.cartService.updateCart(this.cartItems); // Update cart service
+      this.cartService.updateCart(this.cartItems);
     }
   }
 }
