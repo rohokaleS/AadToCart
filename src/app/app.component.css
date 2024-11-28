@@ -331,7 +331,6 @@ button:hover {
     margin-bottom: 10px;
     font-size: 18px;
     color: #d9534f;
-    /* Red color for the discount title */
 }
 
 .discount-section p {
@@ -351,7 +350,7 @@ button:hover {
     margin-bottom: 10px;
     font-size: 18px;
     color: #d9534f;
-    /* Red color for the discount title */
+
 }
 
 .discount-item {
